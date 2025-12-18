@@ -194,7 +194,16 @@ BusinessDirectory includes Docker support for easy containerized deployment.
      -e POSTGRES_SSL=true \
      business-directory
    ```
-
+   or if using the compose.yml
+   ```bash
+   docker compose up -d --build
+   ```
+   
+   #### Docker Run Database Initialization
+   ```bash
+   docker compose exec web sh -lc "pnpm run create-tables"
+   docker compose exec web sh -lc "pnpm run sync-postgresql"
+   ```
 
 
 #### Production Docker Deployment
@@ -220,6 +229,12 @@ For production deployments:
      -e POSTGRES_SSL=true \
      --restart unless-stopped \
      business-directory:latest
+   ```
+
+   #### Docker Run Database Initialization
+   ```bash
+   docker compose exec web sh -lc "pnpm run create-tables"
+   docker compose exec web sh -lc "pnpm run sync-postgresql"
    ```
 
 #### Docker Environment Variables
